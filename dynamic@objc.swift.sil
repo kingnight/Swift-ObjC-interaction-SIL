@@ -1,0 +1,434 @@
+sil_stage raw
+
+import Builtin
+import Swift
+import SwiftShims
+
+import Foundation
+
+import UIKit
+
+import UIKit
+
+@objc class ViewController : UIViewController {
+  override dynamic func viewDidLoad()
+  override dynamic init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+  required dynamic init?(coder: NSCoder)
+  @objc deinit
+}
+
+class Demo {
+  @objc dynamic func test()
+  init()
+  @objc deinit
+}
+
+// main
+sil [ossa] @main : $@convention(c) (Int32, UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>) -> Int32 {
+bb0(%0 : $Int32, %1 : $UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>):
+  %2 = integer_literal $Builtin.Int32, 0          // user: %3
+  %3 = struct $Int32 (%2 : $Builtin.Int32)        // user: %4
+  return %3 : $Int32                              // id: %4
+} // end sil function 'main'
+
+// ViewController.viewDidLoad()
+sil hidden [ossa] @$s4main14ViewControllerC11viewDidLoadyyF : $@convention(method) (@guaranteed ViewController) -> () {
+// %0                                             // users: %2, %1
+bb0(%0 : @guaranteed $ViewController):
+  debug_value %0 : $ViewController, let, name "self", argno 1 // id: %1
+  %2 = copy_value %0 : $ViewController            // user: %3
+  %3 = upcast %2 : $ViewController to $UIViewController // users: %9, %8, %4
+  %4 = begin_borrow %3 : $UIViewController        // users: %7, %5
+  %5 = unchecked_ref_cast %4 : $UIViewController to $ViewController // user: %6
+  %6 = objc_super_method %5 : $ViewController, #UIViewController.viewDidLoad!1.foreign : (UIViewController) -> () -> (), $@convention(objc_method) (UIViewController) -> () // user: %8
+  end_borrow %4 : $UIViewController               // id: %7
+  %8 = apply %6(%3) : $@convention(objc_method) (UIViewController) -> ()
+  destroy_value %3 : $UIViewController            // id: %9
+  %10 = metatype $@thick Demo.Type                // user: %12
+  // function_ref Demo.__allocating_init()
+  %11 = function_ref @$s4main4DemoCACycfC : $@convention(method) (@thick Demo.Type) -> @owned Demo // user: %12
+  %12 = apply %11(%10) : $@convention(method) (@thick Demo.Type) -> @owned Demo // users: %18, %14, %13
+  debug_value %12 : $Demo, let, name "demo"       // id: %13
+  %14 = begin_borrow %12 : $Demo                  // users: %17, %16, %15
+  %15 = objc_method %14 : $Demo, #Demo.test!1.foreign : (Demo) -> () -> (), $@convention(objc_method) (Demo) -> () // user: %16
+  %16 = apply %15(%14) : $@convention(objc_method) (Demo) -> ()
+  end_borrow %14 : $Demo                          // id: %17
+  destroy_value %12 : $Demo                       // id: %18
+  %19 = tuple ()                                  // user: %20
+  return %19 : $()                                // id: %20
+} // end sil function '$s4main14ViewControllerC11viewDidLoadyyF'
+
+// Demo.__allocating_init()
+sil hidden [ossa] @$s4main4DemoCACycfC : $@convention(method) (@thick Demo.Type) -> @owned Demo {
+bb0(%0 : $@thick Demo.Type):
+  %1 = alloc_ref $Demo                            // user: %3
+  // function_ref Demo.init()
+  %2 = function_ref @$s4main4DemoCACycfc : $@convention(method) (@owned Demo) -> @owned Demo // user: %3
+  %3 = apply %2(%1) : $@convention(method) (@owned Demo) -> @owned Demo // user: %4
+  return %3 : $Demo                               // id: %4
+} // end sil function '$s4main4DemoCACycfC'
+
+// @objc ViewController.viewDidLoad()
+sil hidden [thunk] [ossa] @$s4main14ViewControllerC11viewDidLoadyyFTo : $@convention(objc_method) (ViewController) -> () {
+// %0                                             // user: %1
+bb0(%0 : @unowned $ViewController):
+  %1 = copy_value %0 : $ViewController            // users: %6, %2
+  %2 = begin_borrow %1 : $ViewController          // users: %5, %4
+  // function_ref ViewController.viewDidLoad()
+  %3 = function_ref @$s4main14ViewControllerC11viewDidLoadyyF : $@convention(method) (@guaranteed ViewController) -> () // user: %4
+  %4 = apply %3(%2) : $@convention(method) (@guaranteed ViewController) -> () // user: %7
+  end_borrow %2 : $ViewController                 // id: %5
+  destroy_value %1 : $ViewController              // id: %6
+  return %4 : $()                                 // id: %7
+} // end sil function '$s4main14ViewControllerC11viewDidLoadyyFTo'
+
+// ViewController.__allocating_init(nibName:bundle:)
+sil hidden [ossa] @$s4main14ViewControllerC7nibName6bundleACSSSg_So8NSBundleCSgtcfC : $@convention(method) (@owned Optional<String>, @owned Optional<Bundle>, @thick ViewController.Type) -> @owned ViewController {
+// %0                                             // user: %6
+// %1                                             // user: %6
+// %2                                             // user: %3
+bb0(%0 : @owned $Optional<String>, %1 : @owned $Optional<Bundle>, %2 : $@thick ViewController.Type):
+  %3 = thick_to_objc_metatype %2 : $@thick ViewController.Type to $@objc_metatype ViewController.Type // user: %4
+  %4 = alloc_ref_dynamic [objc] %3 : $@objc_metatype ViewController.Type, $ViewController // user: %6
+  // function_ref dynamic ViewController.init(nibName:bundle:)
+  %5 = function_ref @$s4main14ViewControllerC7nibName6bundleACSSSg_So8NSBundleCSgtcfcTD : $@convention(method) (@owned Optional<String>, @owned Optional<Bundle>, @owned ViewController) -> @owned ViewController // user: %6
+  %6 = apply %5(%0, %1, %4) : $@convention(method) (@owned Optional<String>, @owned Optional<Bundle>, @owned ViewController) -> @owned ViewController // user: %7
+  return %6 : $ViewController                     // id: %7
+} // end sil function '$s4main14ViewControllerC7nibName6bundleACSSSg_So8NSBundleCSgtcfC'
+
+// dynamic ViewController.init(nibName:bundle:)
+sil shared [transparent] [serializable] [thunk] [ossa] @$s4main14ViewControllerC7nibName6bundleACSSSg_So8NSBundleCSgtcfcTD : $@convention(method) (@owned Optional<String>, @owned Optional<Bundle>, @owned ViewController) -> @owned ViewController {
+// %0                                             // user: %3
+// %1                                             // users: %17, %16
+// %2                                             // users: %16, %15
+bb0(%0 : @owned $Optional<String>, %1 : @owned $Optional<Bundle>, %2 : @owned $ViewController):
+  switch_enum %0 : $Optional<String>, case #Optional.some!enumelt.1: bb1, case #Optional.none!enumelt: bb2 // id: %3
+
+// %4                                             // users: %10, %6
+bb1(%4 : @owned $String):                         // Preds: bb0
+  // function_ref String._bridgeToObjectiveC()
+  %5 = function_ref @$sSS10FoundationE19_bridgeToObjectiveCSo8NSStringCyF : $@convention(method) (@guaranteed String) -> @owned NSString // user: %7
+  %6 = begin_borrow %4 : $String                  // users: %8, %7
+  %7 = apply %5(%6) : $@convention(method) (@guaranteed String) -> @owned NSString // user: %9
+  end_borrow %6 : $String                         // id: %8
+  %9 = enum $Optional<NSString>, #Optional.some!enumelt.1, %7 : $NSString // user: %11
+  destroy_value %4 : $String                      // id: %10
+  br bb3(%9 : $Optional<NSString>)                // id: %11
+
+bb2:                                              // Preds: bb0
+  %12 = enum $Optional<NSString>, #Optional.none!enumelt // user: %13
+  br bb3(%12 : $Optional<NSString>)               // id: %13
+
+// %14                                            // users: %18, %16
+bb3(%14 : @owned $Optional<NSString>):            // Preds: bb2 bb1
+  %15 = objc_method %2 : $ViewController, #ViewController.init!initializer.1.foreign : (ViewController.Type) -> (String?, Bundle?) -> ViewController, $@convention(objc_method) (Optional<NSString>, Optional<Bundle>, @owned ViewController) -> @owned ViewController // user: %16
+  %16 = apply %15(%14, %1, %2) : $@convention(objc_method) (Optional<NSString>, Optional<Bundle>, @owned ViewController) -> @owned ViewController // user: %19
+  destroy_value %1 : $Optional<Bundle>            // id: %17
+  destroy_value %14 : $Optional<NSString>         // id: %18
+  return %16 : $ViewController                    // id: %19
+} // end sil function '$s4main14ViewControllerC7nibName6bundleACSSSg_So8NSBundleCSgtcfcTD'
+
+// String._bridgeToObjectiveC()
+sil [_semantics "convertToObjectiveC"] @$sSS10FoundationE19_bridgeToObjectiveCSo8NSStringCyF : $@convention(method) (@guaranteed String) -> @owned NSString
+
+// ViewController.init(nibName:bundle:)
+sil hidden [ossa] @$s4main14ViewControllerC7nibName6bundleACSSSg_So8NSBundleCSgtcfc : $@convention(method) (@owned Optional<String>, @owned Optional<Bundle>, @owned ViewController) -> @owned ViewController {
+// %0                                             // users: %38, %11, %6
+// %1                                             // users: %37, %26, %7
+// %2                                             // user: %8
+bb0(%0 : @owned $Optional<String>, %1 : @owned $Optional<Bundle>, %2 : @owned $ViewController):
+  %3 = alloc_box ${ var ViewController }, let, name "self" // user: %4
+  %4 = mark_uninitialized [derivedself] %3 : ${ var ViewController } // users: %39, %5
+  %5 = project_box %4 : ${ var ViewController }, 0 // users: %36, %35, %9, %8
+  debug_value %0 : $Optional<String>, let, name "nibNameOrNil", argno 1 // id: %6
+  debug_value %1 : $Optional<Bundle>, let, name "nibBundleOrNil", argno 2 // id: %7
+  store %2 to [init] %5 : $*ViewController        // id: %8
+  %9 = load [take] %5 : $*ViewController          // user: %10
+  %10 = upcast %9 : $ViewController to $UIViewController // users: %31, %27
+  %11 = begin_borrow %0 : $Optional<String>       // users: %25, %12
+  %12 = copy_value %11 : $Optional<String>        // user: %13
+  switch_enum %12 : $Optional<String>, case #Optional.some!enumelt.1: bb1, case #Optional.none!enumelt: bb2 // id: %13
+
+// %14                                            // users: %20, %16
+bb1(%14 : @owned $String):                        // Preds: bb0
+  // function_ref String._bridgeToObjectiveC()
+  %15 = function_ref @$sSS10FoundationE19_bridgeToObjectiveCSo8NSStringCyF : $@convention(method) (@guaranteed String) -> @owned NSString // user: %17
+  %16 = begin_borrow %14 : $String                // users: %18, %17
+  %17 = apply %15(%16) : $@convention(method) (@guaranteed String) -> @owned NSString // user: %19
+  end_borrow %16 : $String                        // id: %18
+  %19 = enum $Optional<NSString>, #Optional.some!enumelt.1, %17 : $NSString // user: %21
+  destroy_value %14 : $String                     // id: %20
+  br bb3(%19 : $Optional<NSString>)               // id: %21
+
+bb2:                                              // Preds: bb0
+  %22 = enum $Optional<NSString>, #Optional.none!enumelt // user: %23
+  br bb3(%22 : $Optional<NSString>)               // id: %23
+
+// %24                                            // users: %33, %31
+bb3(%24 : @owned $Optional<NSString>):            // Preds: bb2 bb1
+  end_borrow %11 : $Optional<String>              // id: %25
+  %26 = begin_borrow %1 : $Optional<Bundle>       // users: %32, %31
+  %27 = begin_borrow %10 : $UIViewController      // users: %30, %28
+  %28 = unchecked_ref_cast %27 : $UIViewController to $ViewController // user: %29
+  %29 = objc_super_method %28 : $ViewController, #UIViewController.init!initializer.1.foreign : (UIViewController.Type) -> (String?, Bundle?) -> UIViewController, $@convention(objc_method) (Optional<NSString>, Optional<Bundle>, @owned UIViewController) -> @owned UIViewController // user: %31
+  end_borrow %27 : $UIViewController              // id: %30
+  %31 = apply %29(%24, %26, %10) : $@convention(objc_method) (Optional<NSString>, Optional<Bundle>, @owned UIViewController) -> @owned UIViewController // user: %34
+  end_borrow %26 : $Optional<Bundle>              // id: %32
+  destroy_value %24 : $Optional<NSString>         // id: %33
+  %34 = unchecked_ref_cast %31 : $UIViewController to $ViewController // user: %35
+  store %34 to [init] %5 : $*ViewController       // id: %35
+  %36 = load [copy] %5 : $*ViewController         // user: %40
+  destroy_value %1 : $Optional<Bundle>            // id: %37
+  destroy_value %0 : $Optional<String>            // id: %38
+  destroy_value %4 : ${ var ViewController }      // id: %39
+  return %36 : $ViewController                    // id: %40
+} // end sil function '$s4main14ViewControllerC7nibName6bundleACSSSg_So8NSBundleCSgtcfc'
+
+// @objc ViewController.init(nibName:bundle:)
+sil hidden [thunk] [ossa] @$s4main14ViewControllerC7nibName6bundleACSSSg_So8NSBundleCSgtcfcTo : $@convention(objc_method) (Optional<NSString>, Optional<Bundle>, @owned ViewController) -> @owned ViewController {
+// %0                                             // user: %3
+// %1                                             // user: %4
+// %2                                             // user: %18
+bb0(%0 : @unowned $Optional<NSString>, %1 : @unowned $Optional<Bundle>, %2 : @owned $ViewController):
+  %3 = copy_value %0 : $Optional<NSString>        // user: %5
+  %4 = copy_value %1 : $Optional<Bundle>          // user: %18
+  switch_enum %3 : $Optional<NSString>, case #Optional.some!enumelt.1: bb1, case #Optional.none!enumelt: bb2 // id: %5
+
+// %6                                             // user: %8
+bb1(%6 : @owned $NSString):                       // Preds: bb0
+  // function_ref static String._unconditionallyBridgeFromObjectiveC(_:)
+  %7 = function_ref @$sSS10FoundationE36_unconditionallyBridgeFromObjectiveCySSSo8NSStringCSgFZ : $@convention(method) (@guaranteed Optional<NSString>, @thin String.Type) -> @owned String // user: %10
+  %8 = enum $Optional<NSString>, #Optional.some!enumelt.1, %6 : $NSString // users: %12, %10
+  %9 = metatype $@thin String.Type                // user: %10
+  %10 = apply %7(%8, %9) : $@convention(method) (@guaranteed Optional<NSString>, @thin String.Type) -> @owned String // user: %11
+  %11 = enum $Optional<String>, #Optional.some!enumelt.1, %10 : $String // user: %13
+  destroy_value %8 : $Optional<NSString>          // id: %12
+  br bb3(%11 : $Optional<String>)                 // id: %13
+
+bb2:                                              // Preds: bb0
+  %14 = enum $Optional<String>, #Optional.none!enumelt // user: %15
+  br bb3(%14 : $Optional<String>)                 // id: %15
+
+// %16                                            // user: %18
+bb3(%16 : @owned $Optional<String>):              // Preds: bb2 bb1
+  // function_ref ViewController.init(nibName:bundle:)
+  %17 = function_ref @$s4main14ViewControllerC7nibName6bundleACSSSg_So8NSBundleCSgtcfc : $@convention(method) (@owned Optional<String>, @owned Optional<Bundle>, @owned ViewController) -> @owned ViewController // user: %18
+  %18 = apply %17(%16, %4, %2) : $@convention(method) (@owned Optional<String>, @owned Optional<Bundle>, @owned ViewController) -> @owned ViewController // user: %19
+  return %18 : $ViewController                    // id: %19
+} // end sil function '$s4main14ViewControllerC7nibName6bundleACSSSg_So8NSBundleCSgtcfcTo'
+
+// static String._unconditionallyBridgeFromObjectiveC(_:)
+sil [readonly] @$sSS10FoundationE36_unconditionallyBridgeFromObjectiveCySSSo8NSStringCSgFZ : $@convention(method) (@guaranteed Optional<NSString>, @thin String.Type) -> @owned String
+
+// ViewController.__allocating_init(coder:)
+sil hidden [ossa] @$s4main14ViewControllerC5coderACSgSo7NSCoderC_tcfC : $@convention(method) (@owned NSCoder, @thick ViewController.Type) -> @owned Optional<ViewController> {
+// %0                                             // user: %5
+// %1                                             // user: %2
+bb0(%0 : @owned $NSCoder, %1 : $@thick ViewController.Type):
+  %2 = thick_to_objc_metatype %1 : $@thick ViewController.Type to $@objc_metatype ViewController.Type // user: %3
+  %3 = alloc_ref_dynamic [objc] %2 : $@objc_metatype ViewController.Type, $ViewController // user: %5
+  // function_ref dynamic ViewController.init(coder:)
+  %4 = function_ref @$s4main14ViewControllerC5coderACSgSo7NSCoderC_tcfcTD : $@convention(method) (@owned NSCoder, @owned ViewController) -> @owned Optional<ViewController> // user: %5
+  %5 = apply %4(%0, %3) : $@convention(method) (@owned NSCoder, @owned ViewController) -> @owned Optional<ViewController> // user: %6
+  return %5 : $Optional<ViewController>           // id: %6
+} // end sil function '$s4main14ViewControllerC5coderACSgSo7NSCoderC_tcfC'
+
+// dynamic ViewController.init(coder:)
+sil shared [transparent] [serializable] [thunk] [ossa] @$s4main14ViewControllerC5coderACSgSo7NSCoderC_tcfcTD : $@convention(method) (@owned NSCoder, @owned ViewController) -> @owned Optional<ViewController> {
+// %0                                             // users: %4, %3
+// %1                                             // users: %3, %2
+bb0(%0 : @owned $NSCoder, %1 : @owned $ViewController):
+  %2 = objc_method %1 : $ViewController, #ViewController.init!initializer.1.foreign : (ViewController.Type) -> (NSCoder) -> ViewController?, $@convention(objc_method) (NSCoder, @owned ViewController) -> @owned Optional<ViewController> // user: %3
+  %3 = apply %2(%0, %1) : $@convention(objc_method) (NSCoder, @owned ViewController) -> @owned Optional<ViewController> // user: %5
+  destroy_value %0 : $NSCoder                     // id: %4
+  return %3 : $Optional<ViewController>           // id: %5
+} // end sil function '$s4main14ViewControllerC5coderACSgSo7NSCoderC_tcfcTD'
+
+// ViewController.init(coder:)
+sil hidden [ossa] @$s4main14ViewControllerC5coderACSgSo7NSCoderC_tcfc : $@convention(method) (@owned NSCoder, @owned ViewController) -> @owned Optional<ViewController> {
+// %0                                             // users: %27, %9, %30, %5
+// %1                                             // user: %6
+bb0(%0 : @owned $NSCoder, %1 : @owned $ViewController):
+  %2 = alloc_box ${ var ViewController }, let, name "self" // user: %3
+  %3 = mark_uninitialized [derivedself] %2 : ${ var ViewController } // users: %28, %31, %4
+  %4 = project_box %3 : ${ var ViewController }, 0 // users: %25, %24, %7, %6
+  debug_value %0 : $NSCoder, let, name "coder", argno 1 // id: %5
+  store %1 to [init] %4 : $*ViewController        // id: %6
+  %7 = load [take] %4 : $*ViewController          // user: %8
+  %8 = upcast %7 : $ViewController to $UIViewController // users: %14, %10
+  %9 = begin_borrow %0 : $NSCoder                 // users: %15, %14
+  %10 = begin_borrow %8 : $UIViewController       // users: %13, %11
+  %11 = unchecked_ref_cast %10 : $UIViewController to $ViewController // user: %12
+  %12 = objc_super_method %11 : $ViewController, #UIViewController.init!initializer.1.foreign : (UIViewController.Type) -> (NSCoder) -> UIViewController?, $@convention(objc_method) (NSCoder, @owned UIViewController) -> @owned Optional<UIViewController> // user: %14
+  end_borrow %10 : $UIViewController              // id: %13
+  %14 = apply %12(%9, %8) : $@convention(objc_method) (NSCoder, @owned UIViewController) -> @owned Optional<UIViewController> // users: %22, %20, %18
+  end_borrow %9 : $NSCoder                        // id: %15
+  %16 = integer_literal $Builtin.Int1, -1         // user: %18
+  %17 = integer_literal $Builtin.Int1, 0          // user: %18
+  %18 = select_enum %14 : $Optional<UIViewController>, case #Optional.some!enumelt.1: %16, default %17 : $Builtin.Int1 // user: %19
+  cond_br %18, bb2, bb1                           // id: %19
+
+bb1:                                              // Preds: bb0
+  destroy_value %14 : $Optional<UIViewController> // id: %20
+  br bb3                                          // id: %21
+
+bb2:                                              // Preds: bb0
+  %22 = unchecked_enum_data %14 : $Optional<UIViewController>, #Optional.some!enumelt.1 // user: %23
+  %23 = unchecked_ref_cast %22 : $UIViewController to $ViewController // user: %24
+  store %23 to [init] %4 : $*ViewController       // id: %24
+  %25 = load [copy] %4 : $*ViewController         // user: %26
+  %26 = enum $Optional<ViewController>, #Optional.some!enumelt.1, %25 : $ViewController // user: %29
+  destroy_value %0 : $NSCoder                     // id: %27
+  destroy_value %3 : ${ var ViewController }      // id: %28
+  br bb4(%26 : $Optional<ViewController>)         // id: %29
+
+bb3:                                              // Preds: bb1
+  destroy_value %0 : $NSCoder                     // id: %30
+  destroy_value %3 : ${ var ViewController }      // id: %31
+  %32 = enum $Optional<ViewController>, #Optional.none!enumelt // user: %33
+  br bb4(%32 : $Optional<ViewController>)         // id: %33
+
+// %34                                            // user: %35
+bb4(%34 : @owned $Optional<ViewController>):      // Preds: bb2 bb3
+  return %34 : $Optional<ViewController>          // id: %35
+} // end sil function '$s4main14ViewControllerC5coderACSgSo7NSCoderC_tcfc'
+
+// @objc ViewController.init(coder:)
+sil hidden [thunk] [ossa] @$s4main14ViewControllerC5coderACSgSo7NSCoderC_tcfcTo : $@convention(objc_method) (NSCoder, @owned ViewController) -> @owned Optional<ViewController> {
+// %0                                             // user: %2
+// %1                                             // user: %4
+bb0(%0 : @unowned $NSCoder, %1 : @owned $ViewController):
+  %2 = copy_value %0 : $NSCoder                   // user: %4
+  // function_ref ViewController.init(coder:)
+  %3 = function_ref @$s4main14ViewControllerC5coderACSgSo7NSCoderC_tcfc : $@convention(method) (@owned NSCoder, @owned ViewController) -> @owned Optional<ViewController> // user: %4
+  %4 = apply %3(%2, %1) : $@convention(method) (@owned NSCoder, @owned ViewController) -> @owned Optional<ViewController> // user: %5
+  return %4 : $Optional<ViewController>           // id: %5
+} // end sil function '$s4main14ViewControllerC5coderACSgSo7NSCoderC_tcfcTo'
+
+// ViewController.__deallocating_deinit
+sil hidden [ossa] @$s4main14ViewControllerCfD : $@convention(method) (@owned ViewController) -> () {
+// %0                                             // users: %3, %2, %1
+bb0(%0 : @owned $ViewController):
+  debug_value %0 : $ViewController, let, name "self", argno 1 // id: %1
+  %2 = objc_super_method %0 : $ViewController, #UIViewController.deinit!deallocator.1.foreign : (UIViewController) -> () -> (), $@convention(objc_method) (UIViewController) -> () // user: %4
+  %3 = upcast %0 : $ViewController to $UIViewController // users: %5, %4
+  %4 = apply %2(%3) : $@convention(objc_method) (UIViewController) -> ()
+  end_lifetime %3 : $UIViewController             // id: %5
+  %6 = tuple ()                                   // user: %7
+  return %6 : $()                                 // id: %7
+} // end sil function '$s4main14ViewControllerCfD'
+
+// Demo.test()
+sil hidden [ossa] @$s4main4DemoC4testyyF : $@convention(method) (@guaranteed Demo) -> () {
+// %0                                             // user: %1
+bb0(%0 : @guaranteed $Demo):
+  debug_value %0 : $Demo, let, name "self", argno 1 // id: %1
+  %2 = integer_literal $Builtin.Word, 1           // user: %4
+  // function_ref _allocateUninitializedArray<A>(_:)
+  %3 = function_ref @$ss27_allocateUninitializedArrayySayxG_BptBwlF : $@convention(thin) <τ_0_0> (Builtin.Word) -> (@owned Array<τ_0_0>, Builtin.RawPointer) // user: %4
+  %4 = apply %3<Any>(%2) : $@convention(thin) <τ_0_0> (Builtin.Word) -> (@owned Array<τ_0_0>, Builtin.RawPointer) // user: %5
+  (%5, %6) = destructure_tuple %4 : $(Array<Any>, Builtin.RawPointer) // users: %24, %21, %7
+  %7 = pointer_to_address %6 : $Builtin.RawPointer to [strict] $*Any // user: %14
+  %8 = string_literal utf8 "test"                 // user: %13
+  %9 = integer_literal $Builtin.Word, 4           // user: %13
+  %10 = integer_literal $Builtin.Int1, -1         // user: %13
+  %11 = metatype $@thin String.Type               // user: %13
+  // function_ref String.init(_builtinStringLiteral:utf8CodeUnitCount:isASCII:)
+  %12 = function_ref @$sSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %13
+  %13 = apply %12(%8, %9, %10, %11) : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %15
+  %14 = init_existential_addr %7 : $*Any, $String // user: %15
+  store %13 to [init] %14 : $*String              // id: %15
+  // function_ref default argument 1 of print(_:separator:terminator:)
+  %16 = function_ref @$ss5print_9separator10terminatoryypd_S2StFfA0_ : $@convention(thin) () -> @owned String // user: %17
+  %17 = apply %16() : $@convention(thin) () -> @owned String // users: %23, %21
+  // function_ref default argument 2 of print(_:separator:terminator:)
+  %18 = function_ref @$ss5print_9separator10terminatoryypd_S2StFfA1_ : $@convention(thin) () -> @owned String // user: %19
+  %19 = apply %18() : $@convention(thin) () -> @owned String // users: %22, %21
+  // function_ref print(_:separator:terminator:)
+  %20 = function_ref @$ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> () // user: %21
+  %21 = apply %20(%5, %17, %19) : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
+  destroy_value %19 : $String                     // id: %22
+  destroy_value %17 : $String                     // id: %23
+  destroy_value %5 : $Array<Any>                  // id: %24
+  %25 = tuple ()                                  // user: %26
+  return %25 : $()                                // id: %26
+} // end sil function '$s4main4DemoC4testyyF'
+
+// _allocateUninitializedArray<A>(_:)
+sil [serialized] [always_inline] [_semantics "array.uninitialized_intrinsic"] @$ss27_allocateUninitializedArrayySayxG_BptBwlF : $@convention(thin) <τ_0_0> (Builtin.Word) -> (@owned Array<τ_0_0>, Builtin.RawPointer)
+
+// String.init(_builtinStringLiteral:utf8CodeUnitCount:isASCII:)
+sil [serialized] [always_inline] [readonly] [_semantics "string.makeUTF8"] @$sSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String
+
+// default argument 1 of print(_:separator:terminator:)
+sil hidden_external [serialized] @$ss5print_9separator10terminatoryypd_S2StFfA0_ : $@convention(thin) () -> @owned String
+
+// default argument 2 of print(_:separator:terminator:)
+sil hidden_external [serialized] @$ss5print_9separator10terminatoryypd_S2StFfA1_ : $@convention(thin) () -> @owned String
+
+// print(_:separator:terminator:)
+sil @$ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
+
+// @objc Demo.test()
+sil hidden [thunk] [ossa] @$s4main4DemoC4testyyFTo : $@convention(objc_method) (Demo) -> () {
+// %0                                             // user: %1
+bb0(%0 : @unowned $Demo):
+  %1 = copy_value %0 : $Demo                      // users: %6, %2
+  %2 = begin_borrow %1 : $Demo                    // users: %5, %4
+  // function_ref Demo.test()
+  %3 = function_ref @$s4main4DemoC4testyyF : $@convention(method) (@guaranteed Demo) -> () // user: %4
+  %4 = apply %3(%2) : $@convention(method) (@guaranteed Demo) -> () // user: %7
+  end_borrow %2 : $Demo                           // id: %5
+  destroy_value %1 : $Demo                        // id: %6
+  return %4 : $()                                 // id: %7
+} // end sil function '$s4main4DemoC4testyyFTo'
+
+// Demo.init()
+sil hidden [ossa] @$s4main4DemoCACycfc : $@convention(method) (@owned Demo) -> @owned Demo {
+// %0                                             // users: %2, %1
+bb0(%0 : @owned $Demo):
+  debug_value %0 : $Demo, let, name "self", argno 1 // id: %1
+  %2 = mark_uninitialized [rootself] %0 : $Demo   // users: %4, %3
+  %3 = copy_value %2 : $Demo                      // user: %5
+  destroy_value %2 : $Demo                        // id: %4
+  return %3 : $Demo                               // id: %5
+} // end sil function '$s4main4DemoCACycfc'
+
+// Demo.deinit
+sil hidden [ossa] @$s4main4DemoCfd : $@convention(method) (@guaranteed Demo) -> @owned Builtin.NativeObject {
+// %0                                             // users: %2, %1
+bb0(%0 : @guaranteed $Demo):
+  debug_value %0 : $Demo, let, name "self", argno 1 // id: %1
+  %2 = unchecked_ref_cast %0 : $Demo to $Builtin.NativeObject // user: %3
+  %3 = unchecked_ownership_conversion %2 : $Builtin.NativeObject, @guaranteed to @owned // user: %4
+  return %3 : $Builtin.NativeObject               // id: %4
+} // end sil function '$s4main4DemoCfd'
+
+// Demo.__deallocating_deinit
+sil hidden [ossa] @$s4main4DemoCfD : $@convention(method) (@owned Demo) -> () {
+// %0                                             // users: %6, %3, %1
+bb0(%0 : @owned $Demo):
+  debug_value %0 : $Demo, let, name "self", argno 1 // id: %1
+  // function_ref Demo.deinit
+  %2 = function_ref @$s4main4DemoCfd : $@convention(method) (@guaranteed Demo) -> @owned Builtin.NativeObject // user: %4
+  %3 = begin_borrow %0 : $Demo                    // users: %5, %4
+  %4 = apply %2(%3) : $@convention(method) (@guaranteed Demo) -> @owned Builtin.NativeObject // user: %7
+  end_borrow %3 : $Demo                           // id: %5
+  end_lifetime %0 : $Demo                         // id: %6
+  %7 = unchecked_ref_cast %4 : $Builtin.NativeObject to $Demo // user: %8
+  dealloc_ref %7 : $Demo                          // id: %8
+  %9 = tuple ()                                   // user: %10
+  return %9 : $()                                 // id: %10
+} // end sil function '$s4main4DemoCfD'
+
+sil_vtable ViewController {
+  #ViewController.deinit!deallocator.1: @$s4main14ViewControllerCfD	// ViewController.__deallocating_deinit
+}
+
+sil_vtable Demo {
+  #Demo.init!allocator.1: (Demo.Type) -> () -> Demo : @$s4main4DemoCACycfC	// Demo.__allocating_init()
+  #Demo.deinit!deallocator.1: @$s4main4DemoCfD	// Demo.__deallocating_deinit
+}
+
+
+
